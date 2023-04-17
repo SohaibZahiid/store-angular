@@ -1,0 +1,237 @@
+<!-- <header class="header">
+    <div class="container">
+        <nav>
+            <div class="logo"><a href="#">Ikea</a></div>
+            <ul class="nav-list">
+                <li class="nav-item"><a href="/">Home</a></li>
+                <li class="nav-item"><a href="/">About</a></li>
+                <li class="nav-item"><a class="active" href="/">Products</a></li>
+            </ul>
+            <mat-icon routerLink="/cart" matBadge="4" class="mat-badge">shopping_cart</mat-icon>
+        </nav>
+    </div>
+</header> -->
+<main class="main">
+    <div class="content container">
+        <div class="content-left">
+            <form class="form" [formGroup]="filterForm">
+                <div class="form-group">
+                    <input
+                        formControlName="search"
+                        type="text"
+                        placeholder="Search..."
+                        class="search-input"
+                    />
+                </div>
+                <div class="form-group">
+                    <h5>Category</h5>
+                    <div class="category-btns">
+                        <div>
+                            <input type="radio" name="category" id="all"
+                            value="all" formControlName="category">
+                            <label for="all">All</label>
+                        </div>
+                        <div>
+                            <input type="radio" name="category" id="office"
+                            value="office" formControlName="category">
+                            <label for="office">Office</label>
+                        </div>
+                        <div>
+                            <input type="radio" name="category" id="living-room"
+                            value="living-room" formControlName="category">
+                            <label for="living-room">Living Room</label>
+                        </div>
+                        <div>
+                            <input type="radio" name="category" id="kitchen"
+                            value="kitchen" formControlName="category">
+                            <label for="kitchen">Kitchen</label>
+                        </div>
+                        <div>
+                            <input type="radio" name="category" id="bedroom"
+                            value="bedroom" formControlName="category">
+                            <label for="bedroom">Bedroom</label>
+                        </div>
+                        <div>
+                            <input type="radio" name="category" id="dining"
+                            value="dining" formControlName="category">
+                            <label for="dining">Dining</label>
+                        </div>
+                        <div>
+                            <input type="radio" name="category" id="kids"
+                            value="kids" formControlName="category">
+                            <label for="kids">Kids</label>
+                        </div>
+                        <!-- <button class="all active" (click)="getCategory($event)">All</button>
+                        <button class="office" (click)="getCategory($event)">Office</button>
+                        <button class="living-room" (click)="getCategory($event)">Living Room</button>
+                        <button class="kitchen" (click)="getCategory($event)">Kitchen</button>
+                        <button class="bedroom" (click)="getCategory($event)">Bedroom</button>
+                        <button class="dining" (click)="getCategory($event)">Dining</button>
+                        <button class="kids" (click)="getCategory($event)">Kids</button> -->
+                    </div>
+                </div>
+                <div class="form-group">
+                    <h5>Company</h5>
+                    <select formControlName="company">
+                        <option value="all" selected>All</option>
+                        <option value="marcos">Marcos</option>
+                        <option value="liddy">Liddy</option>
+                        <option value="ikea">Ikea</option>
+                        <option value="caressa">Caressa</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <h5>Price</h5>
+                    <p class="price">
+                        {{ filterForm.value.price | currency:'EUR' : 'symbol' }}
+                    </p>
+                    <input
+                        type="range"
+                        name="price"
+                        min="0"
+                        max="{{this.mostExpensiveProduct || 309}}"
+                        formControlName="price"
+                    />
+                </div>
+                <div class="form-group">
+                    <button class="btn" (click)="clearFilters()">Clear Filters</button>
+                </div>
+            </form>
+        </div>
+        <div class="content-right">
+            <div class="filter-bar">
+                <!-- <div class="btn-container">
+                    <mat-icon>apps</mat-icon>
+                    <mat-icon>format_list_bulleted</mat-icon>
+                </div> -->
+                <p>{{products.length}} Products Found</p>
+                <hr />
+                <div class="filter-sort" [formGroup]="filterForm">
+                    <select formControlName="sort">
+                        <option value="price-lowest">Price (Lowest)</option>
+                        <option value="price-highest">Price (Highest)</option>
+                        <option value="name-a">Name (A - Z)</option>
+                        <option value="name-z">Name (Z - A)</option>
+                    </select>
+                </div>
+            </div>
+            <div class="product-container">
+                <article class="product" *ngFor="let product of products">
+                    <img src="{{product.image}}" />
+                    <div class="product-details">
+                        <p class="product-name">{{product.name}}</p>
+                        <p class="product-price">
+                            {{product.price | currency : 'EUR' : 'symbol'}}
+                        </p>
+                    </div>
+                    <div class="overlay">
+                        <mat-icon (click)="addToCart(product)">shopping_cart</mat-icon>
+                    </div>
+                </article>
+                <h5 *ngIf="products.length <= 0">0 Products Found.</h5>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- <header class="header">
+    <div class="container">
+        <nav>
+            <div class="logo"><a href="#">Ikea</a></div>
+            <ul class="nav-list">
+                <li class="nav-item"><a href="">Home</a></li>
+                <li class="nav-item"><a href="">About</a></li>
+                <li class="nav-item"><a href="">Products</a></li>
+            </ul>
+            <mat-icon matBadge="4" class="mat-badge">shopping_cart</mat-icon>
+        </nav>
+    </div>
+</header>
+
+<main class="main">
+    <div class="content container">
+        <div class="content-left">
+            <div class="form">
+                <div class="form-group">
+                    <input
+                        [(ngModel)]="search"
+                        (ngModelChange)="getSearchedProducts($event)"
+                        type="text"
+                        placeholder="Search..."
+                        class="search-input"
+                    />
+                </div>
+                <div class="form-group">
+                    <h5>Category</h5>
+                    <div class="category-btns">
+                        <button class="all active">All</button>
+                        <button class="office">Office</button>
+                        <button class="living-room">Living Room</button>
+                        <button class="kitchen">Kitchen</button>
+                        <button class="bedroom">Bedroom</button>
+                        <button class="dining">Dining</button>
+                        <button class="kids">Kids</button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <h5>Company</h5>
+                    <select
+                        [(ngModel)]="company"
+                        (ngModelChange)="getCompanyProducts($event)"
+                    >
+                        <option value="all" selected>All</option>
+                        <option value="marcos">Marcos</option>
+                        <option value="liddy">Liddy</option>
+                        <option value="ikea">Ikea</option>
+                        <option value="caressa">Caressa</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <h5>Price</h5>
+                    <p class="price">{{ price | currency:'EUR' : 'symbol' }}</p>
+                    <input
+                        type="range"
+                        name="price"
+                        min="0"
+                        max="308"
+                        #ranger
+                        (input)="getPriceProducts(ranger.value)"
+                    />
+                </div>
+            </div>
+        </div>
+        <div class="content-right">
+            <div class="filter-bar">
+                <div class="btn-container">
+                    <mat-icon>apps</mat-icon>
+                    <mat-icon>format_list_bulleted</mat-icon>
+                </div>
+                <p>{{products.length}} Products Found</p>
+                <hr />
+                <div class="filter-sort">
+                    <select
+                        #sort
+                        (change)="getSortedProducts(sort.value)"
+                    >
+                        <option value="price-lowest">Price (Lowest)</option>
+                        <option value="price-highest">Price (Highest)</option>
+                        <option value="name-a">Name (A - Z)</option>
+                        <option value="name-z">Name (Z - A)</option>
+                    </select>
+                </div>
+            </div>
+            <div class="product-container">
+                <article class="product" *ngFor="let product of products">
+                    <img src="{{product.image}}" />
+                    <div class="product-details">
+                        <p class="product-name">{{product.name}}</p>
+                        <p class="product-price">
+                            {{product.price | currency : 'EUR' : 'symbol'}}
+                        </p>
+                    </div>
+                </article>
+                <h5 *ngIf="products.length <= 0">0 Products Found.</h5>
+            </div>
+        </div>
+    </div>
+</main> -->

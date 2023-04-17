@@ -1,0 +1,50 @@
+.header {
+  padding-block: 2em;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+
+.header nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header nav mat-icon {
+  cursor: pointer;
+}
+
+.logo a {
+  font-weight: 700;
+  font-size: 2.4rem;
+  color: var(--clr-primary);
+}
+
+.nav-list {
+  display: flex;
+  gap: 4em;
+}
+
+.nav-list a {
+  color: #222;
+  letter-spacing: 1.6px;
+  font-weight: 500;
+  padding: 1em 0;
+  position: relative;
+
+  transition: 0.3s;
+}
+
+.nav-list a:after {
+  content: "";
+  position: absolute;
+  display: block;
+  background: var(--clr-primary);
+  height: 2px;
+  width: 0;
+  transition: 0.2s;
+}
+
+.nav-list a:hover:after {
+  width: 100%;
+}

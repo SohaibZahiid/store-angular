@@ -1,0 +1,65 @@
+<main class="main container">
+    <div class="cart">
+        <ng-container *ngIf="cart && cart.length > 0; else empty_msg">
+            <div class="header">
+                <h5>Item</h5>
+                <h5>Price</h5>
+                <h5>Quantity</h5>
+                <h5>Subtotal</h5>
+                <span></span>
+            </div>
+            <hr />
+            <div class="items">
+                <article class="item" *ngFor="let product of cart">
+                    <div class="title">
+                        <img src="{{ product.image }}" />
+                        <h5>{{ product.name | titlecase }}</h5>
+                    </div>
+                    <p class="price">
+                        {{ product.price | currency : "EUR" : "symbol" }}
+                    </p>
+                    <div class="quantity">
+                        <!-- <input type="number"
+                            [(ngModel)]="product.quantity"
+                            value="{{product.quantity}}"
+                            (change)="changeQuantity(product)"
+                        > -->
+                        <mat-icon (click)="decreaseQuantity(product)">remove</mat-icon>
+                        <p class="amount">{{product.quantity}}</p>
+                        <mat-icon (click)="increaseQuantity(product)">add</mat-icon>
+                    </div>
+                    <div class="total">
+                        {{ product.subtotal | currency : "EUR" : "symbol" }}
+                    </div>
+                    <button
+                        class="delete-btn"
+                        (click)="deleteProduct(product._id)"
+                    >
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </article>
+                <div class="btn-container">
+                    <button class="btn" routerLink="/products">
+                        Continue Shopping
+                    </button>
+                    <button class="btn" (click)="clearCart()">
+                        Clear Cart
+                    </button>
+                </div>
+            </div>
+            <div class="total-container">
+                <div class="total">
+                    <h3>
+                        Total : {{ totalCart | currency : "EUR" : "symbol" }}
+                    </h3>
+                </div>
+            </div>
+        </ng-container>
+        <!-- <ng-container *ngIf="cart?.length === 0">
+            <h5 style="text-align: center;">Cart is Empty.</h5>
+        </ng-container> -->
+        <ng-template #empty_msg>
+            <h5 style="text-align: center;">Cart is Empty.</h5>
+        </ng-template>
+    </div>
+</main>

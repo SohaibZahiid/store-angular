@@ -1,0 +1,85 @@
+main {
+    margin-block: 5em;
+}
+
+hr {
+    border-top: 1px solid var(--clr-light-gray);
+}
+
+.header {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr auto;
+    justify-content: center;
+    text-align: center;
+    padding-bottom: 2em;
+}
+
+.items {
+    margin-bottom: 2em;
+}
+
+.items .item {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr auto;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+
+    margin-block: 2em;
+}
+
+.items .item .title {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    align-items: center;
+    gap: .5em;
+}
+
+.item h5 {
+    font-size: 1.3rem;
+}
+
+.items .item mat-icon {
+    cursor: pointer;
+}
+
+.delete-btn {
+    background: red;
+    border-radius: 3px;
+}
+
+.delete-btn mat-icon {
+    color: #fff;
+}
+
+.item .quantity {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5em;
+}
+
+.items .btn-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.items .btn-container button {
+    padding: .5em 2em;
+    border-radius: 3px;
+    color: #fff;
+    background: var(--clr-primary);
+}
+
+.total-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.total-container .total {
+    border: 2px solid var(--clr-light-gray);
+    width: min(50%, 400px);
+    padding: 2em;
+    display: flex;
+    justify-content: center;
+}
